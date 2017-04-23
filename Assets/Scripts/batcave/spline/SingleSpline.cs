@@ -78,14 +78,11 @@ public class SingleSpline {
     /// Returns the value of the spline at point X.
     /// </summary>
     public float Value(float X) {
-        // TODO: Implement: find the polynom f_i that passes at X and calculate
-        //       f_i(X).
 			int i;
 			if (X == controlPointscopy [num_of_points-1].x) {
 				return controlPointscopy [num_of_points-1].y;
 			}
 			for (i = 0; i < num_of_points-1; i++ ) {
-			//float xprev, xnext, yprev, ynext;
 				if (controlPointscopy [i].x  <= X && controlPointscopy [i + 1].x  > X) {
 				break;
 				}
@@ -100,7 +97,7 @@ public class SingleSpline {
 			t = (X - controlPointscopy [i].x ) / (controlPointscopy [i + 1].x  - controlPointscopy [i].x );
 			y = (1 - t) * controlPointscopy [i].y + t * controlPointscopy [i + 1].y + t * (1 - t) * (a * (1 - t) + b * t);
 			return y;
-        //return 0f;
+        
     }
 }
 }

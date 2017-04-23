@@ -52,7 +52,8 @@ public class TerrainRasterizer : MonoSingleton<TerrainRasterizer> {
         float baseY = isCeiling ? ceilingY : floorY;
 
         // Create rasterized points.
-        var points = new Vector2[10];
+        //var points = new Vector2[13]; 
+		var points = new Vector2[4];
         index = 0;
         // Create flat edge at the base.
         points[index].x = endPoint.x;
@@ -63,13 +64,17 @@ public class TerrainRasterizer : MonoSingleton<TerrainRasterizer> {
         points[index].x = startPoint.x;
         points[index++].y = startPoint.GetY(isCeiling);
 
-        // EXERCISE: Implement cubic spline interpolation.
+     /*
+      * 
+      * spline restesisation
+      * 
+      * 
 			int amountOfPoints = 6;
 			Vector2[] splinePoints = new Vector2[2];
 			splinePoints [0].x = startPoint.x;
 			splinePoints [0].y = startPoint.GetY(isCeiling);
-			splinePoints [1].x = startPoint.x;
-			splinePoints [2].y = startPoint.GetY(isCeiling);
+			splinePoints [1].x = endPoint.x;
+			splinePoints [1].y = endPoint.GetY(isCeiling);
 			spline = new Spline.ContinuousSpline (splinePoints);
 			Vector2 next;
 			next.x = nextPoint.x;
@@ -77,11 +82,14 @@ public class TerrainRasterizer : MonoSingleton<TerrainRasterizer> {
 			spline.AddControlPoints(next);
 			float delta_X = (endPoint.x - startPoint.x) / (amountOfPoints - 1);
 			int i;
-			for (i = 1; i < amountOfPoints; i++) {
-				points[index].x = startPoint.x+(i*delta_X);
-				points[index++].y = spline.Value(startPoint.x+(i*delta_X));
+			for (i = 1; i < amountOfPoints-1; i++) {
+				if (startPoint.x + (i * delta_X) < endPoint.x) {
+					points [index].x = startPoint.x + (i * delta_X);
+					points [index++].y = spline.Value (startPoint.x + (i * delta_X));
+				}
 			}
 			index = index+i;
+	*/
         // Finish with the end point.
         points[index].x = endPoint.x;
         points[index++].y = endPoint.GetY(isCeiling);

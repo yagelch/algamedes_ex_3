@@ -10,8 +10,6 @@ public class ContinuousSpline : SingleSpline {
     /// Continue the spline with more control points.
     /// </summary>
     public void AddControlPoints(params Vector2[] points) {
-        // TODO: Implement: don't keep all of the control points, there could be
-        //       millions of them!
     
 			controlPointscopy [0] = controlPointscopy [controlPointscopy.Length - 2];
 			controlPointscopy [1] = controlPointscopy [controlPointscopy.Length - 1];
